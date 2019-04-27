@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'ui/home_page.dart';
+import 'package:coding_challenge/bloc/app/app_bloc.dart';
+import 'package:coding_challenge/bloc/app/app_bloc_provider.dart';
 
-void main() => runApp(MyApp());
+void main() => {
+  runApp(MyApp())};
 
 class MyApp extends StatelessWidget {
+  final appBloc = AppBloc();
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -11,7 +16,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: AppBlocProvider(
+          bloc: appBloc, child: MyHomePage(title: 'Flutter Demo Home Page')),
     );
   }
 }

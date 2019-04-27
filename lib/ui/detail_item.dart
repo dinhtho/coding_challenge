@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:coding_challenge/bloc/list_view_bloc.dart';
-import 'package:coding_challenge/bloc/list_view_provider.dart';
+import 'package:coding_challenge/bloc/app/app_bloc_provider.dart';
 import 'package:coding_challenge/model/data.dart';
 
 class DetailItem extends StatefulWidget {
@@ -13,19 +12,20 @@ class DetailItemSate extends State<DetailItem> {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
+    final rowBloc = AppBlocProvider.of(context).rowBloc;
+    final detailViewBloc = AppBlocProvider.of(context).detailViewBloc;
     return StreamBuilder(
-        stream: bloc.getCurrentItem,
+        stream: rowBloc.getRow,
         builder: (context, snapshot) {
-          if (snapshot?.data?.currentData != null) {
-            data = snapshot.data.currentData;
+          if (snapshot?.data != null) {
+            data = snapshot.data;
             return GestureDetector(
               onTap: () {
                 data.value++;
+                detailViewBloc.updateRowData(data);
                 setState(() {
                   data;
                 });
-                bloc.updateItem(bloc.listViewProvider.currentPosition, data);
               },
               child: Container(
                 margin: EdgeInsets.only(top: 20),

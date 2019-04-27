@@ -1,22 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:coding_challenge/model/data.dart';
-import 'package:coding_challenge/bloc/list_view_bloc.dart';
+import 'package:coding_challenge/bloc/row_bloc.dart';
+import 'package:coding_challenge/bloc/app/app_bloc_provider.dart';
 
 class MyRow extends StatelessWidget {
   Data data;
-  int pos;
 
-  MyRow(@required this.data, @required this.pos);
+  MyRow(@required this.data);
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    return GestureDetector(
-      onTap: () => bloc.updateItem(pos, data),
-      child: StreamBuilder<Object>(
-          stream: null,
-          builder: (context, snapshot) {
-            return Container(
+    final rowBloc = AppBlocProvider.of(context).rowBloc;
+    final detailViewBloc = AppBlocProvider.of(context).detailViewBloc;
+    return StreamBuilder(
+        stream: detailViewBloc.updateRow,
+        builder: (context, snapshot) {
+          if (snapshot?.data != null &&
+              snapshot?.data?.position == data.position) {
+            data = snapshot.data;
+          }
+          return GestureDetector(
+            onTap: () => rowBloc.postRowData(data),
+            child: Container(
               color: data.color,
               width: 100,
               height: double.infinity,
@@ -25,8 +30,8 @@ class MyRow extends StatelessWidget {
                 data.value.toString(),
                 style: TextStyle(fontSize: 30),
               )),
-            );
-          }),
-    );
+            ),
+          );
+        });
   }
 }

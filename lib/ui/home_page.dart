@@ -12,17 +12,17 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  List<Data> dataList = [
-    Data(Colors.red, 0),
-    Data(Colors.green, 0),
-    Data(Colors.cyanAccent, 0),
-    Data(Colors.yellow, 0),
-    Data(Colors.purple, 0),
-    Data(Colors.blue, 0),
-    Data(Colors.amberAccent, 0),
-    Data(Colors.blueGrey, 0),
-    Data(Colors.pink, 0),
-    Data(Colors.deepPurple, 0),
+  List<MaterialColor> colors = [
+    Colors.red,
+    Colors.yellow,
+    Colors.green,
+    Colors.blue,
+    Colors.purple,
+    Colors.pink,
+    Colors.blueGrey,
+    Colors.deepPurple,
+    Colors.orange,
+    Colors.lime,
   ];
 
   @override
@@ -37,10 +37,10 @@ class _MyHomePageState extends State<MyHomePage> {
             width: double.infinity,
             height: 100,
             child: ListView.builder(
-                itemCount: dataList.length,
+                itemCount: colors.length,
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (context, i) {
-                  return MyRow(dataList[i], i);
+                  return MyRow(Data(colors[i], 0, i));
                 }),
           ),
           DetailItem()
