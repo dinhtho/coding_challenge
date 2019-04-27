@@ -13,13 +13,13 @@ class MyRow extends StatefulWidget {
 }
 
 class MyRowState extends State<MyRow> {
-  Stream stream;
   Data data;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    data = widget.data;
     WidgetsBinding.instance.addPostFrameCallback(onLayoutDone);
   }
 
@@ -36,13 +36,10 @@ class MyRowState extends State<MyRow> {
 
   @override
   Widget build(BuildContext context) {
-    data = widget.data;
     final rowBloc = AppBlocProvider.of(context).rowBloc;
 
     return GestureDetector(
-      onTap: () {
-        rowBloc.postRowData(data);
-      },
+      onTap: () => rowBloc.postRowData(data),
       child: Container(
         color: data.color,
         width: 100,
