@@ -1,16 +1,11 @@
-import 'package:coding_challenge/bloc/row_bloc.dart';
-import 'package:coding_challenge/bloc/detail_view_bloc.dart';
+import 'package:coding_challenge/bloc/home_page_bloc.dart';
 
 class AppBloc {
-  RowBloc _rowBloc;
-  DetailViewBloc _detailViewBloc;
+  HomePageBloc _homePageBloc;
 
   AppBloc() {
-    _rowBloc = RowBloc();
-    _detailViewBloc = DetailViewBloc();
+    _homePageBloc = HomePageBloc();
   }
 
-  RowBloc get rowBloc => _rowBloc;
-
-  DetailViewBloc get detailViewBloc => _detailViewBloc;
+  HomePageBloc get homePageBloc => _homePageBloc;
 }

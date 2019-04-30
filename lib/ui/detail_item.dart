@@ -12,17 +12,16 @@ class DetailItemSate extends State<DetailItem> {
 
   @override
   Widget build(BuildContext context) {
-    final rowBloc = AppBlocProvider.of(context).rowBloc;
-    final detailViewBloc = AppBlocProvider.of(context).detailViewBloc;
+    final homePageBloc = AppBlocProvider.of(context).homePageBloc;
     return StreamBuilder(
-        stream: rowBloc.getRow,
+        stream: homePageBloc.getRow,
         builder: (context, snapshot) {
           if (snapshot?.data != null) {
             data = snapshot.data;
             return GestureDetector(
               onTap: () {
                 data.value++;
-                detailViewBloc.updateRowData(data);
+                homePageBloc.updateRowData(data);
                 setState(() {
                   data;
                 });

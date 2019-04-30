@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:coding_challenge/model/data.dart';
-import 'package:coding_challenge/bloc/row_bloc.dart';
+import 'package:coding_challenge/bloc/home_page_bloc.dart';
 import 'package:coding_challenge/bloc/app/app_bloc_provider.dart';
 
 class MyRow extends StatefulWidget {
@@ -14,18 +14,20 @@ class MyRow extends StatefulWidget {
 
 class MyRowState extends State<MyRow> {
   Data data;
+  HomePageBloc homePageBloc;
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     data = widget.data;
-    WidgetsBinding.instance.addPostFrameCallback(onLayoutDone);
   }
 
-  void onLayoutDone(_) {
-    final detailViewBloc = AppBlocProvider.of(context).detailViewBloc;
-    detailViewBloc.updateRow.listen((e) {
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    homePageBloc = AppBlocProvider.of(context).homePageBloc;
+    homePageBloc.updateRow.listen((e) {
       if (e != null && e is Data && e.position == data.position) {
         setState(() {
           data = e;
@@ -36,10 +38,8 @@ class MyRowState extends State<MyRow> {
 
   @override
   Widget build(BuildContext context) {
-    final rowBloc = AppBlocProvider.of(context).rowBloc;
-
     return GestureDetector(
-      onTap: () => rowBloc.postRowData(data),
+      onTap: () => homePageBloc.postRowData(data),
       child: Container(
         color: data.color,
         width: 100,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:coding_challenge/ui/row.dart';
 import 'package:coding_challenge/model/data.dart';
 import 'package:coding_challenge/ui/detail_item.dart';
+import 'package:coding_challenge/bloc/app/app_bloc_provider.dart';
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
@@ -47,5 +48,11 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    AppBlocProvider.of(context).homePageBloc.dispose();
   }
 }
