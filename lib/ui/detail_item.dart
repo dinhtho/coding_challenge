@@ -4,10 +4,10 @@ import 'package:coding_challenge/model/data.dart';
 
 class DetailItem extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => DetailItemSate();
+  State<StatefulWidget> createState() => DetailItemState();
 }
 
-class DetailItemSate extends State<DetailItem> {
+class DetailItemState extends State<DetailItem> {
   Data data;
 
   @override
@@ -20,7 +20,7 @@ class DetailItemSate extends State<DetailItem> {
             data = snapshot.data;
             return GestureDetector(
               onTap: () {
-                data.value++;
+                increaseCount();
                 homePageBloc.updateRowData(data);
                 setState(() {
                   data;
@@ -43,5 +43,9 @@ class DetailItemSate extends State<DetailItem> {
             return Container();
           }
         });
+  }
+
+  int increaseCount() {
+    data.value++;
   }
 }
