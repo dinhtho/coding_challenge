@@ -20,8 +20,4 @@ class MyApp extends StatelessWidget {
           bloc: appBloc, child: MyHomePage(title: 'Flutter Demo Home Page')),
     );
   }
-
-  int increment(int a){
-    return a++;
-  }
 }
